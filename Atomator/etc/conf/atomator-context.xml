@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:s="http://www.springframework.org/s" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ 		http://www.springframework.org/schema/context
+ 		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+ 		http://www.springframework.org/schema/jms
+ 		http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-2.0.xsd
+ 		http://camel.apache.org/schema/spring
+ 		http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="atomatorDataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${feed.jdbc.driverClassName}"/>
+        <property name="url" value="${feed.jdbc.url}" />
+        <property name="username" value="${feed.jdbc.username}"/>
+        <property name="password" value="${feed.jdbc.password}"/>
+    </bean>
+	
+	<import resource="classpath:atomator-core.xml"/>
+	
+	<!--  Text Classification services -->
+	<bean id="uClassfyService" class="org.onesun.textmining.uclassify.UClassifyService">
+		<property name="uClassifyReadAccessKey" value="${uClassifyReadAccessKey}" />
+	</bean>
+	
+	<!--  Text Classification Hook : will be invoked to add classification tags to the entry -->
+	<bean id="textClassificationDelegate" class="org.onesun.atomator.test.TextClassificationDelegate">
+	</bean>
+	<!--  Text Classification services -->
+	
+	<bean id="authenticator" class="org.onesun.atomator.test.CommandLineAuthenticator">
+	</bean>
+	
+	<!-- ActiveMQ JMS -->
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"
+		p:brokerURL="${jms.broker.url}" />
+		
+	<jms:listener-container container-type="default"
+		destination-type="topic" connection-factory="connectionFactory"
+		acknowledge="auto">
+	</jms:listener-container>
+	
+	<bean id="customRoutePolicy" class="org.onesun.atomator.test.CustomRoutePolicy" />
+	
+	<camelContext xmlns="http://camel.apache.org/schema/spring" />
+	
+	<!-- Adaptor configuration -->
+	<bean id="genericAdaptor" class="org.onesun.atomator.adaptors.GenericAdaptor" init-method="init">
+		<property name="scrapeTools">
+		
+			<!-- The Full Text RSS service will be tried in the listed order -->
+			<list>
+				<ref bean="wizardRSS" />
+				<ref bean="fiveFilters" />
+				<ref bean="fullTextRSS" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Full Text RSS -->
+	<bean id="fullTextRSS" class="org.onesun.utils.rss.FullTextRSS" init-method="init">
+		<property name="serviceUrl" value="${rss.service.url.FullTextRSS}" />
+	</bean>
+	
+	<bean id="wizardRSS" class="org.onesun.utils.rss.WizardRSS" init-method="init">
+		<property name="serviceUrl" value="${rss.service.url.WizardRSS}" />
+	</bean>
+	
+	<bean id="fiveFilters" class="org.onesun.utils.rss.FiveFilters" init-method="init">
+		<property name="serviceUrl" value="${rss.service.url.FiveFilters}" />
+	</bean>
+</beans>

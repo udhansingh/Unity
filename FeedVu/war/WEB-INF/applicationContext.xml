@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:s="http://www.springframework.org/s" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ 		http://www.springframework.org/schema/context
+ 		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+ 		http://www.springframework.org/schema/jms
+ 		http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-2.0.xsd
+ 		http://camel.apache.org/schema/spring
+ 		http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+<!-- 
+	<context:property-placeholder location="classpath:local.properties" />
+-->
+
+	<bean id="applicationContext" class="org.onesun.sfs.server.AppBeans">
+	</bean>
+	
+	<camelContext xmlns="http://camel.apache.org/schema/spring" />
+	
+	<!-- ActiveMQ JMS -->
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"
+		p:brokerURL="tcp://localhost:61616" />
+		
+	<jms:listener-container container-type="default" destination-type="topic" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="feed-message-topic" ref="messengerRemoteService" method="onMessage" />
+	</jms:listener-container>
+
+	<!--
+	<bean id="messenger" init-method="init" class="org.onesun.sfs.server.Messenger">
+		<property name="topic" value="jms:topic:feed-message-topic" />
+	</bean>
+	-->
+	
+	<bean id="messengerRemoteService" init-method="init" class="org.onesun.sfs.server.MessengerRemoteServiceImpl">
+		<!--
+		<property name="messenger" ref="messenger" />
+		-->
+	</bean>
+</beans>

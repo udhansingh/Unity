@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Permissible Action
+*******************************************************
+subscribe		: Add subscription
+unsubscribe		: Remove subscription
+authorize		: authorize the application; useful to re-establish the token and creating a fresh start 
+none			: No action
+
+	<entry>
+		<action>none</action>
+		<identity>generated</identity>
+		<description>Twitter Status Updates</description>
+		<channelType>twitter</channelType>
+		<feedURL>https://api.twitter.com/1/statuses/friends_timeline.atom</feedURL>
+		<fullText>true [default:false]</fullText>
+		<feedGroup>social-media</feedGroup>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+-->
+<entries>
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Twitter Status Updates</description>
+		<channelType>twitter</channelType>
+		<feedURL>https://api.twitter.com/1/statuses/friends_timeline.atom</feedURL>
+		<feedGroup>social-media</feedGroup>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Life In Code'</description>
+		<channelType>generic</channelType>
+		<feedURL>http://lifencode.com/lifencode/feed/</feedURL>
+		<feedGroup>social-media</feedGroup>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<action>none</action>
+		<identity>generated</identity>
+		<description>TripIt Status Updates</description>
+		<channelType>tripit</channelType>
+		<feedURL>https://api.tripit.com/v1/list/trip</feedURL>
+		<feedGroup>social-media</feedGroup>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Streamwork Activity Updates</description>
+		<channelType>streamwork</channelType>
+		<feedURL>https://streamwork.com/v1/activities</feedURL>
+		<feedGroup>collaboration</feedGroup>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>LinkedIn Network Updates</description>
+		<channelType>linkedin</channelType>
+		<feedURL>http://api.linkedin.com/v1/people/~/network?count=50</feedURL>
+		<feedGroup>social-media</feedGroup>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Engadget [Technology]</description>
+		<channelType>generic</channelType>
+		<feedURL>http://www.engadget.com/rss.xml</feedURL>
+		<feedGroup>technology-news</feedGroup>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>CrunchGear [Technology]</description>
+		<channelType>generic</channelType>
+		<feedURL>http://www.crunchgear.com/feed/rss</feedURL>
+		<feedGroup>technology-news</feedGroup>
+		<fullText>true</fullText>		
+		<user>john.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<action>none</action>
+		<identity>generated</identity>
+		<description>Google Mail</description>
+		<channelType>google</channelType>
+		<feedURL>https://mail.google.com/mail/feed/atom</feedURL>
+		<feedGroup>email</feedGroup>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<action>none</action>
+		<identity>generated</identity>
+		<description>Yahoo Mail</description>
+		<channelType>yahoo</channelType>
+		<feedURL>http://mail.yahooapis.com/ws/mail/v1.1/jsonrpc?method=ListMessages&amp;fid=Inbox</feedURL>
+		<feedGroup>email</feedGroup>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Expertiz [Semiconductor]</description>
+		<channelType>generic</channelType>
+		<feedURL>http://expertiz.in/semiconductor.feed?view=postings&amp;type=rss</feedURL>
+		<feedGroup>recruitment-news</feedGroup>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Expertiz [Technology]</description>
+		<channelType>generic</channelType>
+		<feedURL>http://expertiz.in/technology.feed?view=postings&amp;type=rss</feedURL>
+		<feedGroup>recruitment-news</feedGroup>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Google Mail</description>
+		<channelType>google</channelType>
+		<feedURL>https://mail.google.com/mail/feed/atom</feedURL>
+		<feedGroup>other</feedGroup>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<action>subscribe</action>
+		<identity>generated</identity>
+		<description>Expertiz [Media Marketing and Sales]</description>
+		<channelType>generic</channelType>
+		<feedURL>http://expertiz.in/media-marketing-and-sales.feed?view=postings&amp;type=rss</feedURL>
+		<feedGroup>recruitment-news</feedGroup>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+</entries>

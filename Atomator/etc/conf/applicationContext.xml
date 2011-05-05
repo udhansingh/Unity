@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:s="http://www.springframework.org/s" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ 		http://www.springframework.org/schema/context
+ 		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+ 		http://www.springframework.org/schema/jms
+ 		http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-2.0.xsd
+ 		http://camel.apache.org/schema/spring
+ 		http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<context:property-placeholder location="classpath:atomator.properties" />
+
+	<bean id="theApplicationContext" class="org.onesun.utils.SpringUtils">
+	</bean>
+
+	<import resource="classpath:atomator-context.xml"/>
+	
+	<!--
+		App specific customizations.  The beans here can be moved out of
+		Atomator context.  They exist here only as a demoware.
+	-->
+	<bean id="testApp" init-method="init" class="org.onesun.atomator.test.AtomatorTestApp">
+		<property name="users">
+			<list>
+				<value>john.doe@somedomain.com</value>
+				<value>judy.doe@somedomain.com</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="abderaEntryDAO" init-method="init" class="org.onesun.atomator.test.dao.AbderaEntryDAOImpl">
+	</bean>
+
+	<!-- persistance delegator -->
+	<bean id="persistanceDelegate" init-method="init" class="org.onesun.atomator.test.PersistanceDelegate">
+		<property name="abderaEntryDAO"	ref="abderaEntryDAO" />
+	</bean>
+	
+	<!-- message producer -->
+	<bean id="topicMessenger" init-method="init" class="org.onesun.atomator.test.Messenger">
+		<property name="enabled"	value="${client.broadcast.enabled}" />
+		<property name="topic"		value="${client.broadcast.topic}" />
+	</bean>
+	
+	<bean id="watchMessenger" init-method="init" class="org.onesun.atomator.test.Messenger">
+		<property name="enabled"	value="${client.watcher.enabled}" />
+		<property name="topic"		value="${client.watcher.topic}" />
+	</bean>
+	
+	<!-- message delegator -->
+	<bean id="messengerDelegate" init-method="init" class="org.onesun.atomator.test.MessengerDelegate">
+		<property name="messenger" ref="topicMessenger" />
+	</bean>
+	
+	<!-- watcher delegator -->
+	<bean id="watcherDelegate" init-method="init" class="org.onesun.atomator.test.WatcherDelegate">
+		<property name="messenger" ref="watchMessenger" />
+	</bean>
+</beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entries>
+	<entry>
+		<identity>social-media</identity>
+		<description>Social Media</description>
+		<name>Social Media</name>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<identity>technology-news</identity>
+		<description>Technology News</description>
+		<name>Technology News</name>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<identity>collaboration</identity>
+		<description>Collaboration at Work</description>
+		<name>Collaboration at Work</name>
+		<user>john.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<identity>email</identity>
+		<description>E-Mail</description>
+		<name>E-Mail</name>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+	
+	<entry>
+		<identity>other</identity>
+		<description>Other</description>
+		<name>other</name>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+
+	<entry>
+		<identity>recruitment-news</identity>
+		<description>Expertiz</description>
+		<name>Expertiz</name>
+		<user>judy.doe@somedomain.com</user>
+	</entry>
+</entries>

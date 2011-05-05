@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:s="http://www.springframework.org/s" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ 		http://www.springframework.org/schema/context
+ 		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+ 		http://www.springframework.org/schema/jms
+ 		http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-2.0.xsd
+ 		http://camel.apache.org/schema/spring
+ 		http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="abderaUtils" class="org.onesun.utils.AbderaUtils">
+	</bean>
+	
+	<bean id="adaptorsResource" init-method="init" class="org.onesun.atomator.adaptors.AdaptorFactory">
+		<property name="resource" value="classpath:adaptors.xml"/>
+	</bean>
+	
+	<bean id="secretsResource" init-method="init" class="org.onesun.atomator.core.OAuthSecretsManager">
+		<property name="resource" value="classpath:secrets.xml"/>
+	</bean>
+	
+	<bean id="scribeProperties" init-method="init" class="org.onesun.atomator.core.ScribePropertiesManager">
+		<property name="resource" value="classpath:scribe-properties.xml"/>
+	</bean>
+	
+	<!-- *******************************************************
+		 Configuration Details
+	************************************************************ -->
+	<bean id="configuration" init-method="init" class="org.onesun.atomator.core.Configuration">
+		<property name="dataSource" ref="atomatorDataSource" />
+		
+		<property name="httpConnectionTimeout" value="${config.http.connection.timeout}" />
+		
+		<property name="qname" value="${config.feed.xml.qname}" />
+		<property name="qnamePrefix" value="${config.feed.xml.prefix}" />
+		
+		<!-- ******************************************************* -->
+		<!--  DO NOT RESET THIS : YOU'LL HAVE TO AUTHENTICATE AGAIN  -->
+		<!-- ******************************************************* -->
+		<property name="reinitAuthResults" value="${config.db.auth.data.reinit}" />
+		<!-- ******************************************************* -->
+		<!--  DO NOT RESET THIS : YOU'LL HAVE TO AUTHENTICATE AGAIN  -->
+		<!-- ******************************************************* -->
+		
+		<property name="reinitUserData" value="${config.db.user.data.reinit}" />
+		<property name="loadFromXML" value="${config.load.xml.data}" />
+		
+		<property name="callbackURL" value="${oauth.callback.url}" />
+		<property name="authenticator" ref="authenticator" />
+	</bean>
+	
+	
+	<bean id="oauthResultDAO" init-method="init" class="org.onesun.atomator.dao.OAuthResultDAOImpl">
+	</bean>
+	
+	<bean id="hashEntryDAO" init-method="init" class="org.onesun.atomator.dao.HashEntryDAOImpl">
+	</bean>
+
+	<bean id="subscriptionDAO" init-method="init" class="org.onesun.atomator.dao.SubscriptionDAOImpl">
+	</bean>
+	
+	<bean id="subscriptionGroupDAO" init-method="init" class="org.onesun.atomator.dao.SubscriptionGroupDAOImpl">
+	</bean>
+	
+	<bean id="daoFactory" init-method="init" class="org.onesun.atomator.core.DAOFactory">
+		<property name="hashEntryDAO" ref="hashEntryDAO" />
+		<property name="oauthResultDAO" ref="oauthResultDAO" />
+		<property name="subscriptionDAO" ref="subscriptionDAO" />
+		<property name="subscriptionGroupDAO" ref="subscriptionGroupDAO" />
+	</bean>
+	
+	<bean id="subscriptionManager" init-method="init" class="org.onesun.atomator.core.SubscriptionManager">
+		<property name="resource" value="classpath:subscription-list.xml"/>
+	</bean>
+	
+	<bean id="subscriptionGroupManager" init-method="init" class="org.onesun.atomator.core.SubscriptionGroupManager">
+		<property name="resource" value="classpath:subscription-group-list.xml"/>
+	</bean>
+</beans>

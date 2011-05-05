@@ -1,0 +1,2 @@
+serviceClass: org.onesun.sfs.client.MessengerRemoteService
+path: 9C2E6F55EB9D0CEAFDEFAB8366FB3EC0.gwt.rpc

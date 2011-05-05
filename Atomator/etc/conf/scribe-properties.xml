@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+NOTE: scope element is required for google accounts; you must specify 
+the URL as the scope; this also becomes the feedURL that user can subscribe
+
+To validate which one works and which ones do not; I recommend you check them at
+*************************************************************
+http://googlecodesamples.com/oauth_playground/index.php
+*************************************************************
+Analytics			https://www.google.com/analytics/feeds/
+Google Base			https://www.google.com/base/feeds/
+Book Search			https://www.google.com/books/feeds/
+Blogger				https://www.blogger.com/feeds/
+Calendar			https://www.google.com/calendar/feeds/
+Contacts			https://www.google.com/m8/feeds/
+Documents List		https://docs.google.com/feeds/
+Finance				https://finance.google.com/finance/feeds/
+GMail				https://mail.google.com/mail/feed/atom
+Health				https://www.google.com/health/feeds/
+H9					https://www.google.com/h9/feeds/
+Maps				https://maps.google.com/maps/feeds/
+OpenSocial			https://www-opensocial.googleusercontent.com/api/people/
+Picasa Web			https://picasaweb.google.com/data/
+Sidewiki			https://www.google.com/sidewiki/feeds/
+Sites				https://sites.google.com/feeds/
+Spreadsheets		https://spreadsheets.google.com/feeds/
+Webmaster Tools		https://www.google.com/webmasters/tools/feeds/
+
+Google Specific Mandatory elements
+If you need multiple scopes to be supported, add them to the scope as follows
+				
+https://picasaweb.google.com/data/+https://mail.google.com/mail/feed/atom 
+-->
+<entries>
+	<entry>
+		<identity>linkedin</identity>
+			
+		<properties>
+			<property>
+				<type>scribe</type>
+				<name>scribe.equalizer</name>
+				<value>org.scribe.eq.LinkedInEqualizer</value>
+			</property>
+		</properties>
+	</entry>
+	
+	<entry>
+		<identity>google</identity>
+		
+		<properties>
+			<property>
+				<type>oauth.extension</type>
+				<name>scope</name>
+				<value>https://mail.google.com/mail/feed/atom</value>
+			</property>
+		</properties>
+	</entry>
+	
+	<entry>
+		<identity>facebook</identity>
+		
+		<properties>
+			<property>
+				<type>oauth.extension</type>
+				<name>redirect_uri</name>
+				<value>oob</value>
+			</property>
+		</properties>
+	</entry>
+	
+</entries>

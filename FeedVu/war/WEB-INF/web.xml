@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+  </listener>
+  	
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>EventService</servlet-name>
+    <servlet-class>
+      de.novanic.eventservice.service.EventServiceImpl
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventService</servlet-name>
+    <url-pattern>/feedvu/gwteventservice</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+  	<servlet-name>MessengerRemoteService</servlet-name>
+  	<servlet-class>org.onesun.sfs.server.MessengerRemoteServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MessengerRemoteService</servlet-name>
+  	<url-pattern>/feedvu/MessengerRemoteService</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>FeedVu.html</welcome-file>
+  </welcome-file-list>
+</web-app>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entries>
+	<entry>
+			<identity>twitter</identity>
+			<adaptor>org.onesun.atomator.adaptors.TwitterAdaptor</adaptor>
+			
+			<feed-urls>
+				<feedURL>https://api.twitter.com/1/statuses/friends_timeline.atom</feedURL>
+			</feed-urls>
+	</entry>
+
+	<entry>
+			<identity>streamwork</identity>
+			<adaptor>org.onesun.atomator.adaptors.StreamworkAdaptor</adaptor>
+			
+			<feed-urls>
+				<feedURL>https://streamwork.com/v1/activities</feedURL>
+			</feed-urls>
+	</entry>
+
+	<entry>
+			<identity>linkedin</identity>
+			<adaptor>org.onesun.atomator.adaptors.LinkedInAdaptor</adaptor>
+			
+			<feed-urls>
+				<feedURL>http://api.linkedin.com/v1/people/~/network?count=50</feedURL>
+			</feed-urls>
+	</entry>
+	
+	<entry>
+			<identity>google</identity>
+			<adaptor>org.onesun.atomator.adaptors.GoogleMailAdaptor</adaptor>
+			
+			<feed-urls>
+				<feedURL>https://mail.google.com/mail/feed/atom</feedURL>
+			</feed-urls>
+	</entry>
+
+	<entry>
+			<identity>tripit</identity>
+			<adaptor>org.onesun.atomator.adaptors.TripItAdaptor</adaptor>
+			
+			
+			<feed-urls>
+				<feedURL>https://api.tripit.com/v1/list/trip</feedURL>
+			</feed-urls>
+	</entry>
+	
+	<entry>
+			<identity>yahoo</identity>
+			<adaptor>org.onesun.atomator.adaptors.YahooMailAdaptor</adaptor>
+			
+			<feed-urls>
+				<feedURL>http://mail.yahooapis.com/ws/mail/v1.1/jsonrpc?method=ListMessages&amp;fid=Inbox</feedURL>
+			</feed-urls>
+	</entry>
+
+	<entry>
+			<identity>facebook</identity>
+			<adaptor>org.onesun.atomator.adaptors.FacebookAdaptor</adaptor>
+			
+			<feed-urls>
+			</feed-urls>
+	</entry>
+			
+	<entry>
+			<identity>generic</identity>
+			<adaptor>org.onesun.atomator.adaptors.GenericAdaptor</adaptor>
+			
+			<feed-urls>
+			</feed-urls>
+	</entry>
+</entries>
